@@ -1,4 +1,6 @@
-#RESTful web service that stores some transactions (in memory is fine) and returns information about those transactions.
+#RESTful web service for managing transactions
+
+####RESTful web service that stores some transactions (in memory is fine) and returns information about those transactions.
 
 The transactions to be stored have a type and an amount. The service should support returning all transactions of a type. 
 Also, transactions can be linked to each other (using a "parent_id") and we need to know the total amount involved for all transactions linked to a particular transaction.
