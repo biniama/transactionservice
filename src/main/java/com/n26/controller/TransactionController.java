@@ -31,7 +31,7 @@ public class TransactionController {
      * @return Transaction
      */
     @RequestMapping(value = "transactions/{id}", method = RequestMethod.GET)
-    public Transaction get(@PathVariable("id") Long transactionId) {
+    public @ResponseBody Transaction get(@PathVariable("id") Long transactionId) {
 
         log.info("Getting transaction with id " + transactionId.toString());
         return transactionService.getTransaction(transactionId);
@@ -45,7 +45,7 @@ public class TransactionController {
      * @return Transaction
      */
     @RequestMapping(value = "transactions/{id}", method = RequestMethod.PUT)
-    public Transaction create(@PathVariable("id") Long transactionId, @Validated @RequestBody Transaction transaction) {
+    public @ResponseBody Transaction create(@PathVariable("id") Long transactionId, @Validated @RequestBody Transaction transaction) {
 
         log.info("Creating a new (or updating) Transaction " + transaction.toString());
         return transactionService.createTransaction(transactionId, transaction);
@@ -58,7 +58,7 @@ public class TransactionController {
      * @return List< Long >
      */
     @RequestMapping(value = "types/{type}", method = RequestMethod.GET)
-    public List<Long> findAllByType(@PathVariable("type") String type) {
+    public @ResponseBody List<Long> findAllByType(@PathVariable("type") String type) {
 
         log.info("Getting all transactions with type " + type);
         return transactionService.getAllTransactionIdsByType(type);
@@ -71,7 +71,7 @@ public class TransactionController {
      * @return TransactionSum
      */
     @RequestMapping(value = "sum/{transactionId}", method = RequestMethod.GET)
-    public TransactionSum getSumOfTransactionAmount(@PathVariable("transactionId") Long transactionId) {
+    public @ResponseBody TransactionSum getSumOfTransactionAmount(@PathVariable("transactionId") Long transactionId) {
 
         log.info("Getting the sum of transactions with id " + transactionId);
         return new TransactionSum(transactionService.getSumOfTransactionAmountById(transactionId));
