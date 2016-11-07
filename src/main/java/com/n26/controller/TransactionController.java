@@ -1,11 +1,12 @@
 package com.n26.controller;
 
-import com.n26.entity.Transaction;
+import com.n26.model.Transaction;
 import com.n26.response.wrapper.TransactionSum;
 import com.n26.service.TransactionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ import java.util.List;
  *
  * @author Biniam Asnake
  */
-@RestController
+@Controller
 public class TransactionController {
 
     private static final Logger log = LoggerFactory.getLogger(TransactionController.class);

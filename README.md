@@ -41,7 +41,7 @@ GET /transactionservice/sum/$transaction_id
 
 Returns
 ```json
-{ "sum", double }
+{ "sum": double }
 ```
 A sum of all transactions that are transitively linked by their parent_id to $transaction_id.
 

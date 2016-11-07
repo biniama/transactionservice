@@ -1,31 +1,18 @@
-package com.n26.entity;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+package com.n26.model;
 
 /**
- * Entity class where the elements of Transactions are defined.
+ * Model class where the elements of Transactions are defined.
  *
  * @author Biniam Asnake.
  */
-@Entity
 public class Transaction {
 
-    @Id
-    @Column
     private Long id;
 
-    @Column
-    @NotNull(message = "error.transaction.type.null")
     private String type;
 
-    @Column
-    @NotNull(message = "error.transaction.amount.null")
     private double amount;
 
-    @Column
     private Long parentId;
 
     // default constructor is required for rendering/casting

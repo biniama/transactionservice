@@ -1,13 +1,13 @@
 package com.n26.service;
 
-import com.n26.entity.Transaction;
-import com.n26.exception.TransactionNotFoundException;
-import com.n26.repository.TransactionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.n26.model.Transaction;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static com.n26.TransactionserviceApplication.transactions;
 
 /**
  * Service class that contains methods called from the Controller and
@@ -18,18 +18,16 @@ import java.util.stream.Collectors;
 @Service
 public class TransactionService {
 
-    @Autowired
-    private TransactionRepository transactionRepository;
-
     /**
      * Returns transaction by transaction id
      *
      * @param transactionId: input parameter of transaction id
      * @return transaction
      */
-    public Transaction getTransaction(Long transactionId) {
-        return transactionRepository.findOneById(transactionId)
-                .orElseThrow(TransactionNotFoundException::new);
+    public Optional<Transaction> getTransaction(Long transactionId) {
+        return transactions.stream()
+                .filter(t -> t.getId().equals(transactionId))
+                .findFirst();
     }
 
     /**
@@ -42,7 +40,16 @@ public class TransactionService {
     public Transaction createTransaction(Long transactionId, Transaction transaction) {
 
         transaction.setId(transactionId);
-        return transactionRepository.save(transaction);
+
+        //Get transaction, if it exists then update and if new add
+        Optional<Transaction> existingTransaction = getTransaction(transactionId);
+
+        if (existingTransaction != null) {
+            transactions.remove(existingTransaction);
+        }
+
+        transactions.add(transaction);
+        return transaction;
     }
 
     /**
@@ -54,10 +61,11 @@ public class TransactionService {
     public List<Long> getAllTransactionIdsByType(String type) {
 
         // get a collection of all the ids.
-        List<Transaction> transactions = transactionRepository.findAllByType(type)
-                .orElseThrow(TransactionNotFoundException::new);
-
-        return transactions.stream().map(Transaction::getId).collect(Collectors.toList());
+        return transactions.stream()
+                .filter(t -> t.getType().equals(type))
+                .map(Transaction::getId)
+                .collect(Collectors.toList());
+                //.orElseThrow(TransactionNotFoundException::new);
     }
 
     /**
@@ -68,9 +76,11 @@ public class TransactionService {
      */
     public double getSumOfTransactionAmountById(Long transactionId) {
 
-        List<Transaction> transactions = transactionRepository.findAllByIdOrParentId(transactionId, transactionId)
-                .orElseThrow(TransactionNotFoundException::new);
-
-        return transactions.stream().mapToDouble(Transaction::getAmount).sum();
+        return transactions.stream()
+                .filter(t -> t.getParentId() != null &&
+                        t.getParentId().equals(transactionId) ||
+                        t.getId().equals(transactionId))
+                .mapToDouble(Transaction::getAmount)
+                .sum();
     }
 }

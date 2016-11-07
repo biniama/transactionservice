@@ -1,7 +1,7 @@
 package com.n26
 
 import com.n26.controller.TransactionController
-import com.n26.entity.Transaction
+import com.n26.model.Transaction
 import com.n26.service.TransactionService
 import org.junit.Test
 import org.junit.runner.RunWith
