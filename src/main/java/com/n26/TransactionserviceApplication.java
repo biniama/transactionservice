@@ -14,8 +14,7 @@ public class TransactionserviceApplication {
 
 	public static void main(String[] args) {
 
+		// Stating point of Spring Boot Applications
 		SpringApplication.run(TransactionserviceApplication.class, args);
-
-
 	}
 }

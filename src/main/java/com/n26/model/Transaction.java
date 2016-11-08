@@ -15,7 +15,7 @@ public class Transaction {
 
     private Long parentId;
 
-    // default constructor is required for rendering/casting
+    // default constructor
     public Transaction() {
     }
 

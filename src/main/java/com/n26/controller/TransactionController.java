@@ -28,7 +28,7 @@ public class TransactionController {
     /**
      * Returns transaction by transaction id
      *
-     * @param transactionId
+     * @param transactionId: ID of the transaction supplied by the user
      * @return Transaction
      */
     @RequestMapping(value = "transactions/{id}", method = RequestMethod.GET)
@@ -41,8 +41,8 @@ public class TransactionController {
     /**
      * Accepts and persists transaction data
      *
-     * @param transactionId
-     * @param transaction
+     * @param transactionId: ID of the transaction supplied by the user
+     * @param transaction: transaction object containing type, amount and optional parentId
      * @return Transaction
      */
     @RequestMapping(value = "transactions/{id}", method = RequestMethod.PUT)
@@ -55,8 +55,8 @@ public class TransactionController {
     /**
      * Get all transactionIds by type
      *
-     * @param type
-     * @return List< Long >
+     * @param type: transaction type
+     * @return List<Long>: list of transaction Ids
      */
     @RequestMapping(value = "types/{type}", method = RequestMethod.GET)
     public @ResponseBody List<Long> findAllByType(@PathVariable("type") String type) {
@@ -68,7 +68,7 @@ public class TransactionController {
     /**
      * Get sum of transaction amount by id
      *
-     * @param transactionId
+     * @param transactionId: ID of the transaction supplied by the user
      * @return TransactionSum
      */
     @RequestMapping(value = "sum/{transactionId}", method = RequestMethod.GET)
