@@ -1,6 +1,6 @@
-#RESTful web service for managing transactions
+# RESTful web service for managing transactions
 
-####RESTful web service that stores some transactions (in memory is fine) and returns information about those transactions.
+#### RESTful web service that stores some transactions (in memory is fine) and returns information about those transactions.
 
 The transactions to be stored have a type and an amount. The service should support returning all transactions of a type. 
 Also, transactions can be linked to each other (using a "parent_id") and we need to know the total amount involved for all transactions linked to a particular transaction.
@@ -101,7 +101,6 @@ Date: Thu, 13 Oct 2016 20:35:47 GMT
 
 [1,2]
 
-
 [~]$ curl -i -X GET -H "Content-Type:application/json" http://localhost:8080/types/house
 HTTP/1.1 200
 Content-Type: application/json;charset=UTF-8
@@ -110,7 +109,6 @@ Date: Thu, 13 Oct 2016 20:35:51 GMT
 
 [3]
 
-
 [~]$ curl -i -X GET -H "Content-Type:application/json" http://localhost:8080/sum/1
 HTTP/1.1 200
 Content-Type: application/json;charset=UTF-8
@@ -118,7 +116,6 @@ Transfer-Encoding: chunked
 Date: Thu, 13 Oct 2016 20:35:57 GMT
 
 {"sum":30.0}
-
 
 [~]$ curl -i -X GET -H "Content-Type:application/json" http://localhost:8080/sum/2
 HTTP/1.1 200
